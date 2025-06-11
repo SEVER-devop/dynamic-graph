@@ -1,10 +1,11 @@
 
-int amount = 10;
+int amount = 1000;
 float R[] = new float[amount];
-float velX = 5.0; //направление движения
-float velY = 5.0;
-float x;
-float y;
+float x[] = new float[amount];
+float y[] = new float[amount];
+float velX[] = new float[amount]; //направление движения
+float velY[] = new float[amount];
+
 
 
 void setup() {
@@ -13,8 +14,14 @@ void setup() {
   //frameRate(300);
   //noStroke(); 
   
-  x = width/2;
-  y = height/2;
+  
+  for (int i = 0; i < amount; i++) {
+    R[i] = random(15, 30); 
+    x[i] = width/2;
+    y[i] = height/2;
+    velX[i] = random(5, 8);
+    velY[i] = random(5, 8);
+  }
 }
 
 void draw() {
@@ -22,7 +29,10 @@ void draw() {
   
   noStroke();
   fill(35, 92, 232);
-  circle(x, y, R);
+  
+  for(int i = 0; i < amount; i++){
+    circle(x[i], y[i], R[i]);
+  }
   
   movingCircle(); 
 
@@ -31,8 +41,10 @@ void draw() {
 
 
 void movingCircle() {
-  x += velX;
-  y += velY;
-  if(x < R/2 || x > width - R/2) velX = -velX;
-  if(y < R/2 || y > height - R/2) velY = -velY;
+  for(int i = 0; i< amount; i++){
+    x[i] += velX[i];
+    y[i] += velY[i];
+    if(x[i] < R[i]/2 || x[i] > width - R[i]/2) velX[i] = -velX[i];
+    if(y[i] < R[i]/2 || y[i] > height - R[i]/2) velY[i] = -velY[i];
+  }
 }
